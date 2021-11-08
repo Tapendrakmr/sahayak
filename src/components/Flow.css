@@ -23,3 +23,11 @@ footer {
     height: 10%;
     background-color: #242a35;
 }
+
+#sideContainer {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+

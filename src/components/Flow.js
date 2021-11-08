@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from 'react-bootstrap/Form';
 import Sidebar from './Sidebar';
+import FormComponent from './Form';
 
 function Flow() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -14,10 +15,11 @@ function Flow() {
       <header>
         <span>Sahayak</span>
       </header>
+      <FormComponent />
       <footer>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTti2je5jP4NJyie2Gjynf4ZklgkTOOGdloLQ&usqp=CAU"
-          alt=""
+          src="https://kosare.live/sahayak/assets/images/logo.png"
+          alt="Sahayak"
         />
         <select name="flow" id="flow">
           <option value="null">Choose existing...</option>
@@ -33,6 +35,9 @@ function Flow() {
           onHide={() => setModalShow(false)}
         />
       </footer>
+        <div id="sideContainer">
+          <span><Sidebar /></span>
+        </div>
     </div>
   );
 }
@@ -41,10 +46,11 @@ function MyVerticallyCenteredModal(props) {
 
   let [flowName, setFlowName] = useState({
     flow: '',
-    desc: ''
+    desc: '',
+    sidebar: false
   })
 
-  let [side, showSide] = useState(false);
+  // let [side, showSide] = useState(false);
 
   let handleChange = (e) => {
     let name = e.target.name;
@@ -56,7 +62,9 @@ function MyVerticallyCenteredModal(props) {
   let save = (e) => {
     e.preventDefault();
     console.log(flowName);
-    showSide(true);
+    flowName.sidebar = true;
+    //showSide(true);
+    //console.log(side);
   }
   
   return (
@@ -89,12 +97,13 @@ function MyVerticallyCenteredModal(props) {
             </Form.Select>  
           </Form.Group>
           <Modal.Footer>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={props.onHide} >
               Submit
             </Button>
             <Button onClick={props.onHide}>Cancel</Button>
           </Modal.Footer>
         </Form>
+          {flowName.sidebar ? <Sidebar /> : null}
       </Modal.Body>
     </Modal>
   );
